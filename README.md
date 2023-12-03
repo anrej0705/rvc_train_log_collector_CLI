@@ -10,6 +10,8 @@ This programm scans train.log file which is created due training the RVC model, 
 
 **MSVC 2019**
 
+This project requirements c++17 compatible compiler
+
 Usage: rvc_logs_extractrion.exe train.log
 
 Programm will generates .xlsx(excel) table that contains 5 columns like:
