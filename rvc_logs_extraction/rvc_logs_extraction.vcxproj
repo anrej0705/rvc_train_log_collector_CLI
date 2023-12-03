@@ -113,6 +113,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\nowide\nowide;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\nowide;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\pugixml;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\zippy;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\headers;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX;C:\cppt\rvc_logs_extraction\rvc_logs_extraction;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,6 +158,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\nowide\nowide;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\nowide;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\pugixml;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\zippy;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\headers;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX;C:\cppt\rvc_logs_extraction\rvc_logs_extraction;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

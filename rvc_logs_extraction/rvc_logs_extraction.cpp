@@ -79,7 +79,7 @@ void rvc_logs::parseVals()
 	for (;;++steps)
 	{
 		//Ищем loss_disc и дальше читаем значение которое преобразуем в float и пихаем в контейнер
-		indexIn = filestream.find(tags.tag_disc, indexIn);
+		indexIn = static_cast<int>(filestream.find(tags.tag_disc, indexIn));
 		//Так как loss_disc всегда идёт первым то если новой строки нет, то поиск вернет 0
 		//И значит дальше искать нет смысла
 		if (indexIn == -1)
@@ -87,35 +87,35 @@ void rvc_logs::parseVals()
 			//indexIn = steps;
 			break;
 		}
-		readIn = indexIn + tags.tag_disc.size();
+		readIn = indexIn + static_cast<int>(tags.tag_disc.size());
 		readVal = filestream.substr(readIn, filestream.find(",", indexIn) - readIn);
 		fVal = std::stof(readVal);
 		loss_disc.push_back(fVal);
 
 		//Читаем loss_gen
-		indexIn = filestream.find(tags.tag_gen, indexIn);
-		readIn = indexIn + tags.tag_gen.size();
+		indexIn = static_cast<int>(filestream.find(tags.tag_gen, indexIn));
+		readIn = indexIn + static_cast<int>(tags.tag_gen.size());
 		readVal = filestream.substr(readIn, filestream.find(",", indexIn) - readIn);
 		fVal = std::stof(readVal);
 		loss_gen.push_back(fVal);
 
 		//Читаем loss_fm
-		indexIn = filestream.find(tags.tag_fm, indexIn);
-		readIn = indexIn + tags.tag_fm.size();
+		indexIn = static_cast<int>(filestream.find(tags.tag_fm, indexIn));
+		readIn = indexIn + static_cast<int>(tags.tag_fm.size());
 		readVal = filestream.substr(readIn, filestream.find(",", indexIn) - readIn);
 		fVal = std::stof(readVal);
 		loss_fm.push_back(fVal);
 
 		//Читаем loss_mel
-		indexIn = filestream.find(tags.tag_mel, indexIn);
-		readIn = indexIn + tags.tag_mel.size();
+		indexIn = static_cast<int>(filestream.find(tags.tag_mel, indexIn));
+		readIn = indexIn + static_cast<int>(tags.tag_mel.size());
 		readVal = filestream.substr(readIn, filestream.find(",", indexIn) - readIn);
 		fVal = std::stof(readVal);
 		loss_mel.push_back(fVal);
 
 		//Читаем loss_kl
-		indexIn = filestream.find(tags.tag_kl, indexIn);
-		readIn = indexIn + tags.tag_kl.size();
+		indexIn = static_cast<int>(filestream.find(tags.tag_kl, indexIn));
+		readIn = indexIn + static_cast<int>(tags.tag_kl.size());
 		readVal = filestream.substr(readIn, filestream.find(",", indexIn) - readIn);
 		fVal = std::stof(readVal);
 		loss_kl.push_back(fVal);
@@ -157,7 +157,10 @@ void rvc_logs::saveExcel()
 int main(int argc, char **argv)
 {
 	if (argc < 2)
+	{
 		std::cout << "Just drop train.log file into me" << std::endl;
+		return 0;
+	}
 	std::cout << "Open file for job: " << argv[1] << std::endl;
 	rvc_logs log(argv[1]);
 	log.parseVals();
