@@ -32,17 +32,17 @@ class rvc_logs
 		std::ifstream inFile;
 		int steps;
 		OpenXLSX::XLDocument doc;
+		auto read_file(std::string_view path)->std::string;
 	public:
 		rvc_logs()
 		{
 			steps = 0;
-			inFile.open("train.log");
-			if (!inFile)
-			{
-				exit(-1);
-			}
-			buffer << inFile.rdbuf();
-			filestream = buffer.str();
+			filestream = read_file("train.log");
+		}
+		rvc_logs(std::string file_path)
+		{
+			steps = 0;
+			filestream = read_file(file_path);
 		}
 		~rvc_logs()
 		{
@@ -53,6 +53,21 @@ class rvc_logs
 		void parseVals();
 		void saveExcel();
 };
+
+auto rvc_logs::read_file(std::string_view path)->std::string
+{
+	constexpr auto read_size = std::size_t(4096);
+	auto stream = std::ifstream(path.data());
+	stream.exceptions(std::ios_base::badbit);
+	if (not stream)
+		throw std::ios_base::failure("file does not exists");
+	auto out = std::string();
+	auto buf = std::string(read_size, '\0');
+	while (stream.read(&buf[0], read_size))
+		out.append(buf, 0, static_cast<unsigned int>(stream.gcount()));
+	out.append(buf, 0, static_cast<unsigned int>(stream.gcount()));
+	return out;
+}
 
 void rvc_logs::parseVals()
 {
@@ -110,41 +125,44 @@ void rvc_logs::saveExcel()
 {
 	doc.create("train_stats.xlsx");
 	auto wks = doc.workbook().worksheet("Sheet1");
-	wks.cell("A1").value() = "epoch";
-	wks.cell("B1").value() = "loss_disc";
-	wks.cell("C1").value() = "loss_gen";
-	wks.cell("D1").value() = "loss_fm";
-	wks.cell("E1").value() = "loss_mel";
-	wks.cell("F1").value() = "loss_kl";
-	for (uint16_t rows = loss_disc.size(); rows != 0; --rows)
+	//wks.cell("A1").value() = "epoch";
+	wks.cell("A1").value() = "loss_disc";
+	wks.cell("B1").value() = "loss_gen";
+	wks.cell("C1").value() = "loss_fm";
+	wks.cell("D1").value() = "loss_mel";
+	wks.cell("E1").value() = "loss_kl";
+	for (uint16_t rows = static_cast<uint16_t>(loss_disc.size()); rows != 0; --rows)
 	{
-		wks.cell("A" + std::to_string(rows + 1)).value() = rows;
+		//wks.cell("A" + std::to_string(rows + 1)).value() = rows;
 		std::cout << "step=" << rows << " loss_disc=" << loss_disc.back() << " ";
-		wks.cell("B" + std::to_string(rows + 1)).value() = loss_disc.back();
+		wks.cell("A" + std::to_string(rows + 1)).value() = loss_disc.back();
 		loss_disc.pop_back();
 		std::cout << "loss_gen=" << loss_gen.back() << " ";
-		wks.cell("C" + std::to_string(rows + 1)).value() = loss_gen.back();
+		wks.cell("B" + std::to_string(rows + 1)).value() = loss_gen.back();
 		loss_gen.pop_back();
 		std::cout << "loss_fm=" << loss_fm.back() << " ";
-		wks.cell("D" + std::to_string(rows + 1)).value() = loss_fm.back();
+		wks.cell("C" + std::to_string(rows + 1)).value() = loss_fm.back();
 		loss_fm.pop_back();
 		std::cout << "loss_mel=" << loss_mel.back() << " ";
-		wks.cell("E" + std::to_string(rows + 1)).value() = loss_mel.back();
+		wks.cell("D" + std::to_string(rows + 1)).value() = loss_mel.back();
 		loss_mel.pop_back();
 		std::cout << "loss_kl=" << loss_kl.back() << " ";
-		wks.cell("F" + std::to_string(rows + 1)).value() = loss_kl.back();
+		wks.cell("E" + std::to_string(rows + 1)).value() = loss_kl.back();
 		loss_kl.pop_back();
 		std::cout << std::endl;
 	}
 	std::cout << "Job done! Press eny key to exit" << std::endl;
 }
 
-int main()
+int main(int argc, char **argv)
 {
-	rvc_logs log;
+	if (argc < 2)
+		std::cout << "Just drop train.log file into me" << std::endl;
+	std::cout << "Open file for job: " << argv[1] << std::endl;
+	rvc_logs log(argv[1]);
 	log.parseVals();
 	log.saveExcel();
-	_getch();
+	//_getch();
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

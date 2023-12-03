@@ -93,11 +93,16 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>C:\cppt\rvc_logs_extraction\rvc_logs_extraction;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\nowide\nowide;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\nowide;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\pugixml;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\zippy;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\sources\utilities;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\sources;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\headers;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -125,6 +130,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\cppt\rvc_logs_extraction\rvc_logs_extraction;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\nowide\nowide;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\nowide;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\pugixml;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external\zippy;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\external;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\sources\utilities;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\sources;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX\headers;C:\cppt\rvc_logs_extraction\rvc_logs_extraction\OpenXLSX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
